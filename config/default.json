@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "jwtSecret": "vkmetyk sign in token",
+  "mongoUri": "mongodb+srv://vkmetyk:123321@sigmacluster.stivt.mongodb.net/sigma?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
+}

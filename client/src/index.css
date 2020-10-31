@@ -1,0 +1,53 @@
+@import "~materialize-css/dist/css/materialize.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+.scroll-y {
+  overflow-y: scroll !important;
+}
+
+.pagination {
+  text-align: center;
+}
+
+/*
+  nav-menu-block
+*/
+
+.header__navbar {
+  margin-bottom: 20px;
+}
+
+.header__navbar * {
+  font-size: 18px;
+}
+
+.header__navbar .sidenav-trigger {
+  cursor: pointer;
+}
+
+#mobile-nav-menu {
+  padding: 10px 0;
+}
+
+#mobile-nav-menu * {
+  font-size: 20px;
+}
+
+@media (min-width: 600px) {
+
+}
+
+/*
+  Register page
+*/
+
+.card-action-auth {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
