@@ -12,6 +12,7 @@ export const useRoutes = isAuthenticated => {
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/tour/:id" component={TourPage} />
+        <Route path="/editor/tour/:id" component={EditorTourPage} />
         <Route path="/editor/tour" component={EditorTourPage} />
         <Route path="/login" exact component={SignInPage} />
         <Route path="/register" exact component={SignUpPage} />

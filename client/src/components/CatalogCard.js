@@ -13,7 +13,7 @@ const CatalogCard = ({ tour }) => {
 
   return (
     <div className="col s12 m6">
-      <div className="card">
+      <div className="card large">
         <div className="card-image">
           <img
             ref={imageRef}

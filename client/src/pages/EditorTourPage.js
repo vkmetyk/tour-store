@@ -30,12 +30,14 @@ const EditorTourPage = ({ match }) => {
   });
 
   useEffect(() => {
+    console.log(match.params);
     if (match.params.id) {
+
       request(`/api/tour/${match.params.id}`, 'GET', null)
         .then(fetched => {
           setForm(prev => ({
             ...prev,
-            ...fetched[0]
+            ...fetched
           }));
         })
     }
