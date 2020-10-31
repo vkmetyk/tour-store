@@ -10,7 +10,7 @@ const Catalog = () => {
   useEffect(() => {
     request(`/api/tour`, 'GET', null)
       .then(data => setTours(data))
-      .catch(e => console.log(e));
+      .catch();
   }, [request]);
 
   if (loading) {
@@ -19,15 +19,8 @@ const Catalog = () => {
 
   return (
     <div className="catalog row">
-      {
-        tours?.map(tour =>
-          <CatalogCard tour={tour}/>
-        )
-      }
-      <CatalogCard tour={{_id: 0}}/>
-      <CatalogCard tour={{_id: 0}}/>
-      <CatalogCard tour={{_id: 0}}/>
-      <CatalogCard tour={{_id: 0}}/>
+      {tours?.map(tour =>
+        <CatalogCard key={tour._id} tour={tour}/>)}
     </div>
   );
 };

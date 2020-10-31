@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const CatalogCard = ({ tour }) => {
+  const imageRef = useRef();
+
+  useEffect(() => {
+    window.M.Materialbox.init(imageRef.current);
+  }, []);
+
   if (!tour || !('_id' in tour))
     return null;
-  // ('id' in tour)
+
   return (
     <div className="col s12 m6">
       <div className="card">
         <div className="card-image">
-          <img src={tour.img ?? 'assets/example.jpg'} alt="No example" />
+          <img
+            ref={imageRef}
+            className="materialboxed"
+            src={tour.img || 'assets/example.jpg'}
+            alt="No example"
+          />
           <Link to={`/tour/${tour._id}`}>
             <span className="card-title">{tour.title ?? 'Title'}</span>
           </Link>
