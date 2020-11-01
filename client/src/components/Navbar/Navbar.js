@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import NavbarItems from './NavbarItems';
+import Sidebar from '../Sidebar';
 
-export const Navbar = () => {
+const Navbar = () => {
 
   useEffect(() => {
-    let sidenav = document.querySelector('#mobile-nav-menu');
+    let sidenav = document.querySelector('#sidebar-menu');
     M.Sidenav.init(sidenav, {});
   }, []);
 
@@ -14,7 +15,7 @@ export const Navbar = () => {
     <header>
       <nav className="nav-menu-block light-blue darken-3 header__navbar">
         <div className="nav-wrapper">
-          <span data-target="mobile-nav-menu" className="sidenav-trigger show-on-large"><i
+          <span data-target="sidebar-menu" className="sidenav-trigger show-on-large"><i
             className="material-icons">menu</i></span>
           <Link to="/" className="brand-logo flow-text" style={{width: 'fit-content'}}>
             Travel Anywhere
@@ -27,6 +28,9 @@ export const Navbar = () => {
       <ul id="mobile-nav-menu" className="sidenav">
         <NavbarItems />
       </ul>
+        <Sidebar idName={'sidebar-menu'} />
     </header>
   );
 };
+
+export default Navbar;

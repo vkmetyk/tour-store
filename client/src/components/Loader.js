@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Loader = () => {
+const Loader = () => {
   return (
     <div style={{display: 'flex', justifyContent: 'center', paddingTop: '2rem'}}>
       <div className="preloader-wrapper active">
@@ -19,3 +19,5 @@ export const Loader = () => {
     </div>
   )
 }
+
+export default Loader;

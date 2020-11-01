@@ -101,7 +101,7 @@ router.put('/update/:id', auth, async (req, res) => {
       title, short_description, description, img, price, category
     } = req.body;
 
-    await Tour.findOneAndUpdate({_id:req.params.id}, {
+    await Tour.findOneAndUpdate({ _id:req.params.id }, {
       title, short_description, description, img, price
     }, function (err, place) {
       res.status(200).json({message: 'Tour successfully edited'});

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHttp } from '../hooks/http.hook';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 
 const TourPage = ({ match }) => {
   const [tour, setTour] = useState({});
@@ -28,7 +28,7 @@ const TourPage = ({ match }) => {
     <div className="tour-block">
 
       <div className="row">
-        <img className="col s12 tour-block__img" src={tour.img || '/assets/default.jpg'} />
+        <img className="col s12 tour-block__img" src={tour.img || '/assets/example.jpg'} />
         <h2 className="col s6">{tour.title || ''}</h2>
         <span className="col s6">{tour.category || ''}</span>
         <p className="col s12">{tour.description || ''}</p>

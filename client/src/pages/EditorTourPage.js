@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
-import { Loader } from '../components/Loader';
+import Loader from '../components/Loader';
 import { AuthContext } from '../context/authContext';
 
 const EditorTourPage = ({ match }) => {
@@ -30,7 +30,6 @@ const EditorTourPage = ({ match }) => {
   });
 
   useEffect(() => {
-    console.log(match.params);
     if (match.params.id) {
 
       request(`/api/tour/${match.params.id}`, 'GET', null)
