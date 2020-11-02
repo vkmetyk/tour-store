@@ -55,7 +55,7 @@ const EditorTourPage = ({ match }) => {
 
   const tourAction = async (event) => {
     event.preventDefault();
-    console.log(form.category);
+
     try {
       if (match.params.id) {
         await request(`/api/tour/update/${match.params.id}`, 'PUT', {...form}, {

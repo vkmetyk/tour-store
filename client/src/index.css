@@ -183,6 +183,7 @@ footer {
 
 .tour-page__description {
   font-size: 16px;
+  white-space: pre-line;
 }
 
 .tour-page .indicators {

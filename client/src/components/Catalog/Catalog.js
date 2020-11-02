@@ -18,7 +18,7 @@ const Catalog = () => {
 
   useEffect(() => {
     loadCategories();
-  }, []);
+  }, [loadCategories]);
 
   useEffect(() => {
     const selects = document.querySelectorAll('select');

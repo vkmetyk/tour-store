@@ -14,15 +14,15 @@ app.use('/api/category', require('./routes/category.routes'))
 app.use('/api/order', require('./routes/order.routes'))
 app.use('/api/review', require('./routes/review.routes'))
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use('/', express.static(path.join(__dirname, 'client', 'build')))
-//
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-//   })
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
-const PORT = config.get('port') || 5000
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
+
+const PORT = process.env.PORT || 5000
 
 async function start() {
   try {
@@ -31,7 +31,7 @@ async function start() {
       useUnifiedTopology: true,
       useCreateIndex: true
     })
-    app.listen(config.port, () => {console.log(`App has been started on port ${PORT}...`)})
+    app.listen(PORT, () => {console.log(`App has been started on port ${PORT}...`)})
   } catch (e) {
     console.log('Server Error', e.message)
     process.exit(1)

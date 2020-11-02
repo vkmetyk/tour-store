@@ -136,13 +136,15 @@ router.put('/update/:id', auth,
     if (!category)
       res.status(400).json({message: 'Category with this name not found'});
 
-    await Tour.findOneAndUpdate({ _id:req.params.id }, {
-      title, short_description, description, images, price, category
-    }, function (err, place) {
-      res.status(200).json({message: 'Tour successfully edited'});
-    });
-
-    return res.status(400).json({message: 'Tour not found'});
+    await Tour.updateOne({ _id: req.params.id },
+      { title, short_description, description, images, price, category },
+      function(error, result) {
+        if (error)
+          return res.status(500).json({message: 'Something went wrong'});
+        if (result)
+          return res.status(200).json({message: 'Tour successfully edited'});
+      }
+    );
   } catch (e) {
     res.status(500).json({message: config['errorMsg']});
   }

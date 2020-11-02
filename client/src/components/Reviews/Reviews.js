@@ -10,7 +10,6 @@ const Reviews = ({ tourId }) => {
   const getReviews = useCallback(async () => {
     try {
       const fetched = await request(`/api/review/tour/${tourId}`, 'GET', null);
-      console.log(fetched);
       setReviews(fetched);
     } catch (e) {}
   }, [request, tourId]);

@@ -25,8 +25,7 @@ const TourPage = ({match}) => {
         const fetched = await request(`/api/tour/${tourId}`, 'GET', null);
         setTour(fetched);
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }, [match, request]);
 
   useEffect(() => {
@@ -39,9 +38,8 @@ const TourPage = ({match}) => {
       const fetched = await request(`/api/order/create/${tour._id}`, 'POST', null, {
         Authorization: `Bearer ${auth.token}`
       });
-      message(fetched);
-    } catch (e) {
-    }
+      message(fetched.message);
+    } catch (e) {}
   };
 
   if (loading)
@@ -65,11 +63,9 @@ const TourPage = ({match}) => {
         </div>
         <div className="col s12 row tour-page__about">
           <h5 className="col s12">About tour</h5>
-          <pre>
             <p className="col s12 tour-page__description">
-              {tour?.description.replace('↵', '\n') || ''}
+              {tour?.description || ''}
             </p>
-          </pre>
         </div>
         <div className="col s12 row tour-page__price-block light-blue lighten-4">
           <div className="col s6 center-align">

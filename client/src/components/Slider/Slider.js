@@ -11,7 +11,7 @@ const Slider = ({ slides, subtitle }) => {
 
   if (!slides || slides.length <= 0)
     return null;
-  console.log(slides, slides.length);
+
   return (
     <div className="slider">
       <ul className="slides">
