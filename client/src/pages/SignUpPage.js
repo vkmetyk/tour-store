@@ -28,7 +28,7 @@ const SignUpPage = () => {
     event.preventDefault();
     try {
       const data = await request('/api/auth/register', 'POST', {...form});
-      auth.login(data.token, data.userId);
+      auth.login(data);
       message(data.message);
       history.push('/login');
     } catch (e) {}

@@ -23,7 +23,8 @@ const Reviews = ({ tourId }) => {
     return <Loader />
 
   return (
-    <div className="reviews-block">
+    <div className="col s12 row reviews-block">
+      <h5 className="reviews-block__title">Reviews</h5>
       {reviews.map((review, index) =>
         <Review key={index} review={review} />
       )}

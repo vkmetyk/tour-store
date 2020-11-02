@@ -7,10 +7,26 @@ const Category = require('../models/Category');
 const auth = require('../middleware/auth.middleware');
 const router = Router();
 
-// /api/tour/
+// /api/tour
 router.get('/', async (req, res) => {
   try {
     const tours = await Tour.find({});
+
+    res.status(200).json(tours);
+  } catch (e) {
+    res.status(500).json({message: 'Something went wrong, please try again'});
+  }
+});
+
+// /api/tour/filter
+router.post('/filter', async (req, res) => {
+  try {
+    const category = await Category.findOne({name: req.body.category});
+
+    if (!category)
+      res.status(400).json({message: 'Category with this name not found'});
+
+    const tours = await Tour.find({category: category._id});
 
     res.status(200).json(tours);
   } catch (e) {
@@ -64,16 +80,16 @@ router.post(
       } = req.body;
 
       const images = req.body.images.trim().length > 0 ?
-        req.body.images.trim() : null;
+        req.body.images.trim().split('\n') : null;
 
-      let category = null;
+      const category = await Category.findOne({ name: req.body.category });
 
-      if (req.body.category)
-        category = await Category.findOne({ name: req.body.category })?._id;
+      if (!category)
+        res.status(400).json({message: 'Category with this name not found'});
 
       const tour = new Tour({
         title, short_description, description, images,
-        price, category, owner: user.userId
+        price, category: category._id, owner: user.userId
       });
 
       await tour.save();
@@ -112,8 +128,13 @@ router.put('/update/:id', auth,
       return res.status(400).json({message: 'Permission denied'});
 
     const {
-      title, short_description, description, images, price, category
+      title, short_description, description, images, price
     } = req.body;
+
+    const category = await Category.findOne({ name: req.body.category });
+
+    if (!category)
+      res.status(400).json({message: 'Category with this name not found'});
 
     await Tour.findOneAndUpdate({ _id:req.params.id }, {
       title, short_description, description, images, price, category

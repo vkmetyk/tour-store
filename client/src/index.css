@@ -23,6 +23,14 @@ main {
   text-align: center;
 }
 
+.progress {
+  background-color: #00bcd4 !important;
+}
+
+.indeterminate {
+  background-color: #039be5 !important;
+}
+
 .input-field input.valid {
   border-bottom: 1px solid #ffb74d !important;
   box-shadow: 0 1px 0 0 #ffb74d !important;
@@ -48,8 +56,42 @@ main {
   color: #343434 !important;
 }
 
-.slider .slides {
-  background: #b3e5fc;
+/*.tour-page .slider .slides li img {*/
+/*  height: 400px;*/
+/*  margin-left: auto !important;*/
+/*  margin-right: auto !important;*/
+/*}*/
+
+/*
+  Reviews
+*/
+
+.reviews-block {
+  margin: 20px 0;
+  padding: 0 !important;
+}
+
+.reviews-block__title {
+  margin: 15px;
+}
+
+.reviews-block__review-block {
+  background: #e1f5fe;
+  padding: 10px !important;
+  /*border-bottom: 1px solid #333;*/
+}
+
+.review-block__name {
+  font-size: 17px !important;
+}
+
+.review-block__date {
+  font-size: 15px !important;
+}
+
+.review-block__text {
+  margin-top: 5px;
+  font-size: 17px;
 }
 
 /*
@@ -58,7 +100,6 @@ main {
 
 .header__navbar {
   box-sizing: content-box;
-  padding: 5px 0;
   background-image: radial-gradient(circle farthest-corner at 22.4% 21.7%, #04BDE4 0%, #0253B9 100.2%);
 }
 
@@ -68,14 +109,6 @@ main {
 
 .header__navbar .sidenav-trigger {
   cursor: pointer;
-}
-
-#mobile-nav-menu {
-  padding: 10px 0;
-}
-
-#mobile-nav-menu * {
-  font-size: 20px;
 }
 
 /*
@@ -117,6 +150,15 @@ footer {
   font-size: 16px;
 }
 
+.category-filter {
+  margin: 40px 15px 15px 15px !important;
+}
+
+.edit-tour-link {
+  right: 10px !important;
+  top: 10px !important;
+}
+
 /*
   Tour page
 */
@@ -136,7 +178,7 @@ footer {
 
 .tour-page__title {
   font-size: 30px;
-  margin: 25px 0 10px 0;
+  margin: 25px 10px 10px 10px !important;
 }
 
 .tour-page__description {
@@ -157,7 +199,7 @@ footer {
 }
 
 .tour-page .indicators .active {
-  background: #0277bd !important;
+  background: #039be5 !important;
 }
 
 .tour-page__price-block {

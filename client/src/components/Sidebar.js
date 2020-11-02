@@ -32,12 +32,12 @@ const Sidebar = ({idName}) => {
         </div>
       </li>
       <li>
-        <Link to="/contacts">
+        <a href="#footer">
           <i className="material-icons">local_phone</i>Contact us
-        </Link>
+        </a>
       </li>
       <li>
-        <div className="divider"></div>
+        <div className="divider" />
       </li>
       {/*<li><a className="subheader">Useful links</a></li>*/}
       <NavbarItems/>

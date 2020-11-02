@@ -3,7 +3,7 @@ const Category = require('../models/Category');
 const auth = require('../middleware/auth.middleware');
 const router = Router();
 
-// /api/category/
+// /api/category
 router.get('/', async (req, res) => {
   try {
     const categories = await Category.find({});
@@ -13,9 +13,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// /api/category/create/
-// auth,
-router.post('/create',
+// /api/category/create
+router.post('/create', auth,
   async (req, res) => {
   try {
     const {name, description} = req.body;

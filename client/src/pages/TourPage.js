@@ -65,9 +65,11 @@ const TourPage = ({match}) => {
         </div>
         <div className="col s12 row tour-page__about">
           <h5 className="col s12">About tour</h5>
-          <p className="col s12 tour-page__description">
-            {tour.description || ''}
-          </p>
+          <pre>
+            <p className="col s12 tour-page__description">
+              {tour?.description.replace('↵', '\n') || ''}
+            </p>
+          </pre>
         </div>
         <div className="col s12 row tour-page__price-block light-blue lighten-4">
           <div className="col s6 center-align">

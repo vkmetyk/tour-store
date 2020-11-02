@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/authContext';
 
 const CatalogCard = ({ tour }) => {
   const imageRef = useRef();
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     window.M.Materialbox.init(imageRef.current);
@@ -21,13 +23,21 @@ const CatalogCard = ({ tour }) => {
             src={(tour?.images?.length && tour?.images[0]) || '/assets/example.jpg'}
             alt="No example"
           />
+          {auth.isAdmin &&
+            <Link
+              to={`/editor/tour/${tour._id}`}
+              className="btn-floating halfway-fab waves-effect waves-light light-blue darken-3 edit-tour-link">
+              <i className="material-icons">edit</i>
+            </Link>
+          }
           <Link to={`/tour/${tour._id}`}>
             <span className="card-title">{tour.title ?? 'Title'}</span>
           </Link>
         </div>
         <div className="card-content">
-          <pre>{tour.short_description ?? 'I am a very simple card. I am good at containing small bits of information.' +
-          'I am convenient because I require little markup to use effectively.'}</pre>
+          <span>
+            {tour.short_description ?? ''}
+          </span>
         </div>
         <div className="card-action">
           <Link to={`/tour/${tour._id}`} className="card-action__link">Open</Link>

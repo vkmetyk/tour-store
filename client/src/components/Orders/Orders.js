@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
 import { useMessage } from '../../hooks/message.hook';
 import { useHttp } from '../../hooks/http.hook';
-import Loader from '../Loader';
 import Order from './Order';
 
 const Orders = () => {
@@ -30,7 +29,7 @@ const Orders = () => {
   }, [getLink]);
 
   if (loading)
-    return <Loader />
+    return null;
 
   return (
     <ul className="orders-block collection with-header">
