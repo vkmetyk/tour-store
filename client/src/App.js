@@ -3,10 +3,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useRoutes } from './routes';
 import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './context/authContext';
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar';
 import Loader from './components/Loader';
 import './index.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 const App = () => {
   const {token, login, logout, userId, userRole, ready} = useAuth();
@@ -20,17 +20,17 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={{
-      token, login, logout, userId, userRole, isAuthenticated
+      token, login, logout, userId, userRole, isAuthenticated, isAdmin
     }}>
       <Router>
-        <Navbar/>
-        <Sidebar />
-        <div className="container">
+        <Header/>
+        <main>
           {routes}
-        </div>
+        </main>
+        <Footer/>
       </Router>
     </AuthContext.Provider>
   );
-}
+};
 
 export default App;

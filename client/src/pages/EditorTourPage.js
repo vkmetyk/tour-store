@@ -9,16 +9,23 @@ const EditorTourPage = ({ match }) => {
   const auth = useContext(AuthContext);
   const history = useHistory();
   const message = useMessage();
+  const {loading, request, error, clearError} = useHttp();
+
+  const [categoryList, setCategoryList] = useState([]);
   const [form, setForm] = useState({
     title: '',
     description: '',
     short_description: '',
-    img: '',
-    category: '',
+    images: '',
+    category: null,
     price: 0,
   });
 
-  const {loading, request, error, clearError} = useHttp();
+  useEffect(() => {
+    const selects = document.querySelectorAll('select');
+    window.M.FormSelect.init(selects, {});
+    window.M.updateTextFields();
+  });
 
   useEffect(() => {
     message(error);
@@ -26,19 +33,18 @@ const EditorTourPage = ({ match }) => {
   }, [error, message, clearError]);
 
   useEffect(() => {
-    window.M.updateTextFields();
-  });
+    const selectList = document.querySelectorAll('select');
+    window.M.FormSelect.init(selectList, {});
+    request(`/api/category`, 'GET', null)
+      .then(data => setCategoryList(data));
+  }, [request]);
 
   useEffect(() => {
     if (match.params.id) {
-
       request(`/api/tour/${match.params.id}`, 'GET', null)
         .then(fetched => {
-          setForm(prev => ({
-            ...prev,
-            ...fetched
-          }));
-        })
+          setForm(prev => ({...prev, ...fetched}));
+        });
     }
   }, [request, match, setForm]);
 
@@ -47,8 +53,9 @@ const EditorTourPage = ({ match }) => {
     setForm({...form, [event.target.name]: event.target.value});
   };
 
-  const createNewTour = async (event) => {
+  const tourAction = async (event) => {
     event.preventDefault();
+    console.log(form.category);
     try {
       if (match.params.id) {
         await request(`/api/tour/update/${match.params.id}`, 'PUT', {...form}, {
@@ -69,26 +76,14 @@ const EditorTourPage = ({ match }) => {
     return <Loader />;
 
   return (
-    <>
+    <div className="container">
       <div className="row">
+        <h4 className="center-align">Tour editor</h4>
         <form className="col s12">
           <div className="row">
 
             <div className="input-field col s12">
-              <i className="material-icons prefix">account_circle</i>
-              <input
-                id="img"
-                type="text"
-                name="img"
-                className="validate"
-                value={form.img}
-                onChange={changeHandler}
-              />
-              <label htmlFor="img">Image (just link supported)</label>
-            </div>
-
-            <div className="input-field col s12">
-              <i className="material-icons prefix">account_circle</i>
+              <i className="material-icons prefix">title</i>
               <input
                 id="title"
                 type="text"
@@ -101,7 +96,7 @@ const EditorTourPage = ({ match }) => {
             </div>
 
             <div className="input-field col s12">
-              <i className="material-icons prefix">account_circle</i>
+              <i className="material-icons prefix">short_text</i>
               <input
                 id="short-description"
                 type="text"
@@ -114,34 +109,45 @@ const EditorTourPage = ({ match }) => {
             </div>
 
             <div className="input-field col s12">
-              <i className="material-icons prefix">account_circle</i>
-              <input
+              <i className="material-icons prefix">description</i>
+              <textarea
                 id="description"
                 type="text"
                 name="description"
-                className="validate"
+                className="materialize-textarea"
                 value={form.description}
                 onChange={changeHandler}
               />
               <label htmlFor="description">Description</label>
             </div>
 
-            <div className="input-field col s6">
-              <i className="material-icons prefix">account_circle</i>
-              <input
-                id="category"
+            <div className="input-field col s12">
+              <i className="material-icons prefix">burst_mode</i>
+              <textarea
+                id="images"
                 type="text"
-                name="category"
-                className="validate"
-                value={form.category}
+                name="images"
+                className="materialize-textarea"
+                value={form.images}
                 onChange={changeHandler}
               />
-              <label htmlFor="category">Category</label>
+              <label htmlFor="images">Images (one link per line)</label>
             </div>
 
             <div className="input-field col s6">
-              <i className="material-icons prefix">account_circle</i>
+              <i className="material-icons prefix">filter_list</i>
+              <select name="category" onChange={changeHandler} defaultValue={null}>
+                {categoryList.map((category, index) =>
+                  <option key={index} value={category.name}>{category.name}</option>
+                )}
+              </select>
+              <label>Category</label>
+            </div>
+
+            <div className="input-field col s6">
+              <i className="material-icons prefix">attach_money</i>
               <input
+                min="0"
                 id="price"
                 type="number"
                 name="price"
@@ -154,8 +160,8 @@ const EditorTourPage = ({ match }) => {
 
             <a
               href="/"
-              className="waves-effect waves-light btn col s12"
-              onClick={createNewTour}
+              className="waves-effect waves-light btn col s12 light-blue darken-1"
+              onClick={tourAction}
             >
               Submit
             </a>
@@ -164,7 +170,7 @@ const EditorTourPage = ({ match }) => {
         </form>
       </div>
 
-    </>
+    </div>
   );
 };
 

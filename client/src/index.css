@@ -5,6 +5,16 @@
   font-family: 'Lato', sans-serif;
 }
 
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 .scroll-y {
   overflow-y: scroll !important;
 }
@@ -13,12 +23,43 @@
   text-align: center;
 }
 
+.input-field input.valid {
+  border-bottom: 1px solid #ffb74d !important;
+  box-shadow: 0 1px 0 0 #ffb74d !important;
+}
+
+.input-field .prefix.active {
+  color: #039be5 !important;
+}
+
+.input-field input:focus + label,
+.input-field textarea:focus + label {
+  color: #039be5 !important;
+}
+/* label underline focus color */
+.input-field input:focus,
+.input-field textarea:focus {
+  border-bottom: 1px solid #039be5 !important;
+  box-shadow: 0 1px 0 0 #039be5 !important;
+}
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: #343434 !important;
+}
+
+.slider .slides {
+  background: #b3e5fc;
+}
+
 /*
   nav-menu-block
 */
 
 .header__navbar {
-  margin-bottom: 20px;
+  box-sizing: content-box;
+  padding: 5px 0;
+  background-image: radial-gradient(circle farthest-corner at 22.4% 21.7%, #04BDE4 0%, #0253B9 100.2%);
 }
 
 .header__navbar * {
@@ -37,8 +78,15 @@
   font-size: 20px;
 }
 
-@media (min-width: 600px) {
+/*
+  Footer
+*/
 
+footer {
+  background-image: linear-gradient( 112.1deg,  rgba(63,76,119,1) 11.4%, rgba(32,38,57,1) 70.2% );
+}
+.sidebar__background {
+  background-image: radial-gradient(circle farthest-corner at 22.4% 21.7%, #04BDE4 0%, #0253B9 100.2%);
 }
 
 /*
@@ -50,4 +98,89 @@
   text-align: center;
   justify-content: center;
   display: flex;
+}
+
+/*
+  Catalog
+*/
+
+.catalog {
+  padding: 10px 0 0 0;
+}
+
+.tour-date {
+  color: #757575;
+}
+
+.card-action__link {
+  color: #00bcd4 !important;
+  font-size: 16px;
+}
+
+/*
+  Tour page
+*/
+
+.tour-page__price {
+  font-size: 25px;
+}
+
+.tour-page .add-review-block {
+  padding-bottom: 20px;
+  margin: 20px 0;
+}
+
+.tour-page .add-review-block .input-field {
+  margin: 35px 0 5px 0;
+}
+
+.tour-page__title {
+  font-size: 30px;
+  margin: 25px 0 10px 0;
+}
+
+.tour-page__description {
+  font-size: 16px;
+}
+
+.tour-page .indicators {
+  padding-bottom: 10px;
+}
+
+.tour-page .indicator-item {
+  width: 12px !important;
+  height: 12px !important
+}
+
+.tour-page .slide.active {
+  background: #e3f2fd !important;
+}
+
+.tour-page .indicators .active {
+  background: #0277bd !important;
+}
+
+.tour-page__price-block {
+  padding: 10px !important;
+}
+
+.tour-page__price-block,
+.tour-page__price-block * {
+  margin: 0 !important;
+}
+
+/*
+  Profile page
+*/
+
+.profile-block {
+  padding: 20px 0;
+}
+
+.profile-block__name {
+  font-size: 24px;
+}
+
+.profile-block__email {
+  font-size: 16px;
 }

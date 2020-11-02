@@ -3,6 +3,7 @@ const {check, validationResult} = require('express-validator');
 const config = require('config')
 const User = require('../models/User');
 const Tour = require('../models/Tour');
+const Category = require('../models/Category');
 const auth = require('../middleware/auth.middleware');
 const router = Router();
 
@@ -10,7 +11,7 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
     const tours = await Tour.find({});
-    console.log(tours);
+
     res.status(200).json(tours);
   } catch (e) {
     res.status(500).json({message: 'Something went wrong, please try again'});
@@ -20,7 +21,6 @@ router.get('/', async (req, res) => {
 // /api/tour/:id
 router.get('/:id', async (req, res) => {
   try {
-    console.log(req.params);
     const tour = await Tour.findOne({_id: req.params.id});
 
     res.status(200).json(tour);
@@ -35,8 +35,8 @@ router.post(
   auth,
   [
     check('title', 'Enter title').isLength({min: 1}),
-    check('price', 'Enter price').exists(),
-    check('category', 'Pick category').exists()
+    check('price', 'Enter price').exists().isNumeric(),
+    check('category', 'Select category').isLength({min: 1}),
   ],
   async (req, res) => {
     try {
@@ -60,13 +60,20 @@ router.post(
         title,
         short_description,
         description,
-        img,
-        price,
-        category
+        price
       } = req.body;
 
+      const images = req.body.images.trim().length > 0 ?
+        req.body.images.trim() : null;
+
+      let category = null;
+
+      if (req.body.category)
+        category = await Category.findOne({ name: req.body.category })?._id;
+
       const tour = new Tour({
-        title, short_description, description, img, price, owner: user.userId // Add category !!!!!!!!!
+        title, short_description, description, images,
+        price, category, owner: user.userId
       });
 
       await tour.save();
@@ -79,7 +86,14 @@ router.post(
   }
 );
 
-router.put('/update/:id', auth, async (req, res) => {
+// /api/tour/update/:id
+router.put('/update/:id', auth,
+  [
+    check('title', 'Enter title').isLength({min: 1}),
+    check('price', 'Enter price').exists(),
+    check('category', 'Select category').isLength({min: 1}),
+  ],
+  async (req, res) => {
   try {
     const errors = validationResult(req);
 
@@ -98,11 +112,11 @@ router.put('/update/:id', auth, async (req, res) => {
       return res.status(400).json({message: 'Permission denied'});
 
     const {
-      title, short_description, description, img, price, category
+      title, short_description, description, images, price, category
     } = req.body;
 
     await Tour.findOneAndUpdate({ _id:req.params.id }, {
-      title, short_description, description, img, price
+      title, short_description, description, images, price, category
     }, function (err, place) {
       res.status(200).json({message: 'Tour successfully edited'});
     });

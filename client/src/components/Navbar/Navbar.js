@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className="nav-menu-block light-blue darken-3 header__navbar">
+      <nav className="nav-menu-block header__navbar">
         <div className="nav-wrapper">
           <span data-target="sidebar-menu" className="sidenav-trigger show-on-large"><i
             className="material-icons">menu</i></span>

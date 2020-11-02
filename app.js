@@ -10,8 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/tour', require('./routes/tour.routes'))
-// app.use('/api/order', require('./routes/order.routes'))
-// app.use('/api/review', require('./routes/review.routes'))
+app.use('/api/category', require('./routes/category.routes'))
+app.use('/api/order', require('./routes/order.routes'))
+app.use('/api/review', require('./routes/review.routes'))
 
 // if (process.env.NODE_ENV === 'production') {
 //   app.use('/', express.static(path.join(__dirname, 'client', 'build')))

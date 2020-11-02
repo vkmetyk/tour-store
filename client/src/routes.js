@@ -15,7 +15,7 @@ export const useRoutes = (isAuthenticated, isAdmin) => {
       <Route path="/login" exact component={SignInPage} />
       <Route path="/register" exact component={SignUpPage} />
       {isAuthenticated && <Route path="/profile" exact component={ProfilePage} />}
-      {isAuthenticated && <Route path="/profile/orders" exact component={HomePage} />}
+      {/*{isAuthenticated && <Route path="/profile/orders" exact component={OrdersPage} />}*/}
       {(isAuthenticated && isAdmin) && <Route path="/editor/tour/:id" component={EditorTourPage} />}
       {(isAuthenticated && isAdmin) && <Route path="/editor/tour" component={EditorTourPage} />}
       <Redirect to="/" />

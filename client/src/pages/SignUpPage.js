@@ -76,16 +76,16 @@ const SignUpPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <div className="card-action card-action-auth">
-          <a
-            href="/"
-            className="btn waves-effect teal waves-light col auth-button"
-            onClick={registerHandler}
-            disabled={loading}
-          >
-            Register
-          </a>
-        </div>
+      </div>
+      <div className="card-action card-action-auth row">
+        <a
+          href="/"
+          className="btn waves-effect col s6 center-block auth-button light-blue darken-1"
+          onClick={registerHandler}
+          disabled={loading}
+        >
+          Register
+        </a>
       </div>
     </div>
   )

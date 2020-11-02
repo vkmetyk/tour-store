@@ -15,12 +15,11 @@ const NavbarItems = () => {
   return (
     <>
       {auth.userRole === 'admin' &&
-        <li><NavLink to="/create/tour" className="waves-effect">Create tour</NavLink></li>
+        <li><NavLink to="/editor/tour" className="waves-effect">Create tour</NavLink></li>
       }
       {auth.isAuthenticated ?
         <>
           <li><NavLink to="/profile" className="waves-effect">Profile</NavLink></li>
-          <li><NavLink to="/profile/orders" className="waves-effect">My orders</NavLink></li>
           <li><a href="/" onClick={logoutHandler} className="waves-effect">Log out</a></li>
         </>
         :

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CatalogCard from './CatalogCard';
-import Loader from './Loader';
-import { useHttp } from '../hooks/http.hook';
+import Loader from '../Loader';
+import { useHttp } from '../../hooks/http.hook';
 
 const Catalog = () => {
   const [tours, setTours] = useState([]);

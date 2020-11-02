@@ -63,15 +63,15 @@ const SignInPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <div className="card-action card-action-auth">
-          <button
-            className="btn waves-effect waves-light col light-blue darken-1"
-            onClick={loginHandler}
-            disabled={loading}
-          >
-            Log in
-          </button>
-        </div>
+      </div>
+      <div className="card-action card-action-auth row">
+        <button
+          className="btn waves-effect waves-light col s5 center-block light-blue darken-1"
+          onClick={loginHandler}
+          disabled={loading}
+        >
+          Log in
+        </button>
       </div>
     </div>
   )

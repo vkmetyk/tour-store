@@ -18,7 +18,7 @@ const CatalogCard = ({ tour }) => {
           <img
             ref={imageRef}
             className="materialboxed"
-            src={tour.img || 'assets/example.jpg'}
+            src={(tour?.images?.length && tour?.images[0]) || '/assets/example.jpg'}
             alt="No example"
           />
           <Link to={`/tour/${tour._id}`}>
@@ -26,11 +26,16 @@ const CatalogCard = ({ tour }) => {
           </Link>
         </div>
         <div className="card-content">
-          <p>{tour.short_description ?? 'I am a very simple card. I am good at containing small bits of information.' +
-          'I am convenient because I require little markup to use effectively.'}</p>
+          <pre>{tour.short_description ?? 'I am a very simple card. I am good at containing small bits of information.' +
+          'I am convenient because I require little markup to use effectively.'}</pre>
         </div>
         <div className="card-action">
-          <Link to={`/tour/${tour._id}`}>Look more</Link>
+          <Link to={`/tour/${tour._id}`} className="card-action__link">Open</Link>
+          {tour.date &&
+            <span className="right tour-date">
+              {new Date(tour?.date).toDateString().slice(4) || ''}
+            </span>
+          }
         </div>
       </div>
     </div>
