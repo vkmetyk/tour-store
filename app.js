@@ -35,11 +35,8 @@ function listen() {
 
 function connect() {
   setTimeout(() => {
-    connectionDelay *= 2;
-    mongoose.connection
-      .on('error', console.log)
-      .on('disconnected', connect)
-      .once('open', listen);
+    if (connectionDelay < 100000)
+      connectionDelay *= 2;
     return mongoose.connect(config.get('mongoUri'), {
       keepAlive: 1,
       useNewUrlParser: true,
@@ -48,6 +45,11 @@ function connect() {
     });
   }, connectionDelay)
 }
+
+mongoose.connection
+  .on('error', console.log)
+  .on('disconnected', connect)
+  .once('open', listen);
 
 let connectionDelay = 100;
 
