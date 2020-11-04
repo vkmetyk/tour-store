@@ -24,19 +24,31 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000
 
-async function start() {
+function listen() {
   try {
-    await mongoose.connect(config.get('mongoUri'), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
-    })
     app.listen(PORT, () => {console.log(`App has been started on port ${PORT}...`)})
   } catch (e) {
     console.log('Server Error', e.message)
     process.exit(1)
   }
-
 }
 
-start()
+function connect() {
+  setTimeout(() => {
+    connectionDelay *= 2;
+    mongoose.connection
+      .on('error', console.log)
+      .on('disconnected', connect)
+      .once('open', listen);
+    return mongoose.connect(config.get('mongoUri'), {
+      keepAlive: 1,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+  }, connectionDelay)
+}
+
+let connectionDelay = 100;
+
+connect();
